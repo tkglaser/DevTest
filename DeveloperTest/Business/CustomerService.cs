@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using DeveloperTest.Business.Interfaces;
+using DeveloperTest.Business.Mapping;
 using DeveloperTest.Database;
 using DeveloperTest.Database.Models;
 using DeveloperTest.Models;
@@ -17,40 +18,24 @@ namespace DeveloperTest.Business
 
         public CustomerModel[] GetCustomers()
         {
-            return context.Customers.Select(x => new CustomerModel
-            {
-                CustomerId = x.CustomerId,
-                Name = x.Name,
-                Type = x.Type
-            }).ToArray();
+            return context.Customers.Select(x => x.ToModel()).ToArray();
         }
 
         public CustomerModel GetCustomer(int customerId)
         {
-            return context.Customers.Where(x => x.CustomerId == customerId).Select(x => new CustomerModel
-            {
-                CustomerId = x.CustomerId,
-                Name = x.Name,
-                Type = x.Type
-            }).SingleOrDefault();
+            return context.Customers
+                .Where(x => x.CustomerId == customerId)
+                .Select(x => x.ToModel())
+                .SingleOrDefault();
         }
 
         public CustomerModel CreateCustomer(BaseCustomerModel model)
         {
-            var addedJob = context.Customers.Add(new Customer
-            {
-                Name = model.Name,
-                Type = model.Type
-            });
+            var addedCustomer = context.Customers.Add(model.ToDbModel());
 
             context.SaveChanges();
 
-            return new CustomerModel
-            {
-                CustomerId = addedJob.Entity.CustomerId,
-                Name = addedJob.Entity.Name,
-                Type = addedJob.Entity.Type
-            };
+            return addedCustomer.Entity.ToModel();
         }
     }
 }

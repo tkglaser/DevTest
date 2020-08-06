@@ -10,5 +10,8 @@ namespace DeveloperTest.Models
 
         [Required]
         public DateTime When { get; set; }
+
+        [Required]
+        public int? CustomerId { get; set; }
     }
 }

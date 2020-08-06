@@ -33,6 +33,9 @@ namespace DeveloperTest.Database
                     When = DateTime.Now
                 });
 
+            modelBuilder.Entity<Job>()
+                .HasOne(p => p.Customer);
+
             modelBuilder.Entity<Customer>()
                 .HasKey(x => x.CustomerId);
 
