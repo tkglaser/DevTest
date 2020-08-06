@@ -19,8 +19,8 @@ export class CustomerService {
     return this.httpClient.get<CustomerModel>(`${environment.apiEndpoint}/customer/${customerId}`);
   }
 
-  public CreateCustomer(customer: CustomerModel): Promise<object> {
-    return this.httpClient.post(`${environment.apiEndpoint}/customer`, customer).toPromise();
+  public CreateCustomer(customer: CustomerModel): Observable<CustomerModel> {
+    return this.httpClient.post<CustomerModel>(`${environment.apiEndpoint}/customer`, customer);
   }
 
 }
