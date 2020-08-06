@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { EngineerService } from '../services/engineer.service';
 import { JobService } from '../services/job.service';
 import { JobModel } from '../models/job.model';
+import { JobCreateModel } from '../models/job.createmodel';
 
 @Component({
   selector: 'app-job',
@@ -15,10 +16,10 @@ export class JobComponent implements OnInit {
 
   public jobs: JobModel[] = [];
 
-  public newJob: JobModel = {
-    jobId: null,
+  public newJob: JobCreateModel = {
     engineer: null,
-    when: null
+    when: null,
+    customerId: null
   };
 
   constructor(

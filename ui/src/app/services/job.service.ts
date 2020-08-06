@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JobModel } from '../models/job.model';
 import { environment } from 'src/environments/environment';
+import { JobCreateModel } from '../models/job.createmodel';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class JobService {
     return this.httpClient.get<JobModel>(`${environment.apiEndpoint}/job/${jobId}`);
   }
 
-  public CreateJob(job: JobModel): Promise<object> {
+  public CreateJob(job: JobCreateModel): Promise<object> {
     return this.httpClient.post(`${environment.apiEndpoint}/job`, job).toPromise();
   }
 }
