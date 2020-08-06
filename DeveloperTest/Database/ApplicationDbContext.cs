@@ -11,7 +11,6 @@ namespace DeveloperTest.Database
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            // TODO: Generate Migration!!!
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

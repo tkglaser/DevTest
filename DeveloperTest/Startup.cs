@@ -27,11 +27,8 @@ namespace DeveloperTest
                 .AddControllers()
                 .AddJsonOptions(opts => opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
-            // TODO: Add Migration and switch back to localdb
-            // services.AddDbContext<ApplicationDbContext>(options =>
-            //     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseInMemoryDatabase("ServiceSightDevTest"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<IJobService, JobService>();
             services.AddTransient<ICustomerService, CustomerService>();
